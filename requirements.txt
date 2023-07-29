@@ -1,0 +1,12 @@
+The package requirements for the given Python program are as follows:
+
+- requests
+- nltk
+- matplotlib
+- wordcloud
+
+You can install these packages using pip:
+
+```
+pip install requests nltk matplotlib wordcloud
+```
