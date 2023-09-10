@@ -4,12 +4,13 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 from nltk.sentiment import SentimentIntensityAnalyzer
 
+
 class StockMarketAnalyzer:
     def __init__(self, api_key):
         self.api_key = api_key
-        self.stock_api_url = "https://api.example.com/stocks" 
-        self.social_media_api_url = "https://api.example.com/social-media" 
-        self.news_article_api_url = "https://api.example.com/news-articles" 
+        self.stock_api_url = "https://api.example.com/stocks"
+        self.social_media_api_url = "https://api.example.com/social-media"
+        self.news_article_api_url = "https://api.example.com/news-articles"
 
     def collect_real_time_data(self):
         stock_data = self.get_stock_data()
@@ -19,17 +20,20 @@ class StockMarketAnalyzer:
         return stock_data, social_media_data, news_article_data
 
     def get_stock_data(self):
-        response = requests.get(self.stock_api_url, params={"apiKey": self.api_key})
+        response = requests.get(self.stock_api_url, params={
+                                "apiKey": self.api_key})
         stock_data = response.json()
         return stock_data
 
     def get_social_media_data(self):
-        response = requests.get(self.social_media_api_url, params={"apiKey": self.api_key})
+        response = requests.get(self.social_media_api_url, params={
+                                "apiKey": self.api_key})
         social_media_data = response.json()
         return social_media_data
 
     def get_news_article_data(self):
-        response = requests.get(self.news_article_api_url, params={"apiKey": self.api_key})
+        response = requests.get(self.news_article_api_url, params={
+                                "apiKey": self.api_key})
         news_article_data = response.json()
         return news_article_data
 
@@ -79,12 +83,17 @@ class StockMarketAnalyzer:
         api_key = input("Enter your API key: ")
         stock_market_analyzer = cls(api_key)
         stock_data, social_media_data, news_article_data = stock_market_analyzer.collect_real_time_data()
-        preprocessed_data = stock_market_analyzer.preprocess_text_data(social_media_data + news_article_data)
-        sentiment_scores = stock_market_analyzer.analyze_sentiment(preprocessed_data)
-        stock_sentiment = stock_market_analyzer.analyze_sentiment_of_stocks(sentiment_scores)
-        stock_market_analyzer.generate_sentiment_distribution_chart(sentiment_scores)
+        preprocessed_data = stock_market_analyzer.preprocess_text_data(
+            social_media_data + news_article_data)
+        sentiment_scores = stock_market_analyzer.analyze_sentiment(
+            preprocessed_data)
+        stock_sentiment = stock_market_analyzer.analyze_sentiment_of_stocks(
+            sentiment_scores)
+        stock_market_analyzer.generate_sentiment_distribution_chart(
+            sentiment_scores)
         stock_market_analyzer.generate_word_cloud(preprocessed_data)
         stock_market_analyzer.display_results(stock_sentiment)
+
 
 if __name__ == '__main__':
     StockMarketAnalyzer.run_analysis()
