@@ -16,7 +16,6 @@ class StockMarketAnalyzer:
         stock_data = self.get_stock_data()
         social_media_data = self.get_social_media_data()
         news_article_data = self.get_news_article_data()
-
         return stock_data, social_media_data, news_article_data
 
     def get_stock_data(self):
@@ -38,10 +37,7 @@ class StockMarketAnalyzer:
         return news_article_data
 
     def preprocess_text_data(self, text_data):
-        preprocessed_data = []
-        for text in text_data:
-            processed_text = self.preprocess_text(text)
-            preprocessed_data.append(processed_text)
+        preprocessed_data = [self.preprocess_text(text) for text in text_data]
         return preprocessed_data
 
     def preprocess_text(self, text):
@@ -51,11 +47,8 @@ class StockMarketAnalyzer:
         return processed_text
 
     def analyze_sentiment(self, text_data):
-        sentiment_scores = []
-        sid = SentimentIntensityAnalyzer()
-        for text in text_data:
-            sentiment_score = sid.polarity_scores(text)["compound"]
-            sentiment_scores.append(sentiment_score)
+        sentiment_scores = [SentimentIntensityAnalyzer().polarity_scores(text)[
+            "compound"] for text in text_data]
         return sentiment_scores
 
     def generate_sentiment_distribution_chart(self, sentiment_scores):
